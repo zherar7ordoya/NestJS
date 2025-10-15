@@ -8,20 +8,36 @@ export interface User {
 
 @Injectable()
 export class TasksService {
-testing() {
+
+    private tasks: any = [];
+
+
+    testing() {
         return 'This is a test';
     }
 
-    getTasks() : User[] {
-        return [
-            { id: 1, name: 'Task 1', age: 25 },
-            { id: 2, name: 'Task 2', age: 30 },
-            { id: 3, name: 'Task 3', age: 35 }
-        ];
+    getTasks() {
+        return this.tasks;
     }
 
-    createTask() {
-        return 'Creating a task from service...';
+    getTask(id: number) {
+
+        const taskFound = this.tasks.find((task: any) => task.id === id);
+
+        if (!taskFound) {
+            return `Task with id ${id} not found`;
+        }
+
+        return taskFound;
+    }
+
+    createTask(task: any) {
+        console.log(task);
+        this.tasks.push({
+            ...task,
+            id: this.tasks.length + 1
+        });
+        return task;
     }
 
     updateTask() {

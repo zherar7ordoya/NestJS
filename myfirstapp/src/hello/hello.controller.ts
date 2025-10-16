@@ -3,9 +3,10 @@ Cuando hablamos de controladores, solamente estamos hablando
 de funciones que se van a llamar cuando una ruta sea visitada.
 */
 
-import { Controller, Get, HttpCode, Param, ParseBoolPipe, ParseFilePipeBuilder, ParseIntPipe, Query, Req, Res } from '@nestjs/common';
+import { Controller, Get, HttpCode, Param, ParseBoolPipe, ParseFilePipeBuilder, ParseIntPipe, Query, Req, Res, UseGuards } from '@nestjs/common';
 import type { Request, Response } from 'express';
 import { ValidateuserPipe } from './pipes/validateuser/validateuser.pipe';
+import { AuthGuard } from './guards/auth/auth.guard';
 
 @Controller()
 export class HelloController {
@@ -47,9 +48,10 @@ export class HelloController {
     }
 
     @Get('greet')
+    @UseGuards(AuthGuard)
     greet(@Query(ValidateuserPipe) query: {name: string, age: number}) {
         console.log(typeof query.name);
         console.log(typeof query.age);
-        return `Hello ${query.name}, you are ${query.age + 100} years old.`;
+        return `Hello ${query.name}, you are ${query.age + 30} years old.`;
     }
 }

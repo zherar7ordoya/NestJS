@@ -2,12 +2,12 @@ import { IsEmail, IsNotEmpty, IsNumber, IsString, Max, MinLength } from "class-v
 
 
 export class CreateUserDto {
-    @IsNumber()
-    id: number;
+    // @IsNumber()
+    // id: number;
 
     @IsString()
     @MinLength(4)
-    username: string;
+    name: string;
 
     @IsString()
     @MinLength(6)
@@ -17,7 +17,7 @@ export class CreateUserDto {
     @IsNotEmpty()
     email: string;
 
-    @IsNumber()
-    @Max(100)
-    age: number;
+    // @IsNumber()
+    // @Max(100)
+    // age: number;
 }
